@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- bootstrap4 cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+
+<body>
+<!--navbar start-->
+ 
+        <header >
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">                
+                <a href="#" class="navbar-brand">
+                    <h5><b>Weather Application</b></h5>
+                </a>  
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                   
+                </div>
+            </nav>
+        </header>    
+    
+<!--navbar end-->
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                               {{form.name}}
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">
+                                    Add City
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification {{msgclass}}">
+                            {{msg}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for a in weather %}
+
+
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{a.icon}}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">{{a.city}}</span>
+                                        <br>
+                                        <span class="subtitle">{{a.temparature}}° F</span>
+                                        <br> {{a.description}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media-right">
+                                <a href="{%url 'city_remove' city_name=a.city%}">
+                                 <button class='delete'></button>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                     {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+
+
+     <!-- bootstrap js, jquery, popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html> 
